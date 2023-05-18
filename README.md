@@ -610,3 +610,224 @@ class Solution2 { //gpt 가 생성한 답 차이가 뭐지 차이가 없는데 �
         }
     }
     ```
+    ## 주사위 게임 2
+
+### **문제 설명**
+
+1부터 6까지 숫자가 적힌 주사위가 세 개 있습니다. 세 주사위를 굴렸을 때 나온 숫자를 각각 `a`, `b`, `c`라고 했을 때 얻는 점수는 다음과 같습니다.
+
+- 세 숫자가 모두 다르다면 `a` + `b` + `c` 점을 얻습니다.
+- 세 숫자 중 어느 두 숫자는 같고 나머지 다른 숫자는 다르다면 (`a` + `b` + `c`) × (`a` + `b` + `c` )점을 얻습니다.
+    
+    2
+    
+    2
+    
+    2
+    
+- 세 숫자가 모두 같다면 (`a` + `b` + `c`) × (`a` + `b` + `c` ) × (`a` + `b` + `c` )점을 얻습니다.
+    
+    2
+    
+    2
+    
+    2
+    
+    3
+    
+    3
+    
+    3
+    
+
+세 정수 `a`, `b`, `c`가 매개변수로 주어질 때, 얻는 점수를 return 하는 solution 함수를 작성해 주세요.
+
+---
+
+### 제한사항
+
+- `a`, `b`, `c`는 1이상 6이하의 정수입니다.
+
+---
+
+### 입출력 예
+
+| a | b | c | result |
+| --- | --- | --- | --- |
+| 2 | 6 | 1 | 9 |
+| 5 | 3 | 3 | 473 |
+| 4 | 4 | 4 | 110592 |
+
+---
+
+### 입출력 예 설명
+
+입출력 예 #1
+
+- 예제 1번에서 세 주사위 숫자가 모두 다르므로 2 + 6 + 1 = 9점을 얻습니다. 따라서 9를 return 합니다.
+
+입출력 예 #2
+
+- 예제 2번에서 두 주사위 숫자만 같으므로 (5 + 3 + 3) × (5 + 3 + 3 ) = 11 × 43 = 473점을 얻습니다. 따라서 473을 return 합니다.
+    
+    2
+    
+    2
+    
+    2
+    
+
+입출력 예 #3
+
+- 예제 3번에서 세 주사위 숫자가 모두 같으므로 (4 + 4 + 4) × (4 + 4 + 4 ) × (4 + 4 + 4 ) = 12 × 48 × 192 = 110,592점을 얻습니다. 따라서 110592를 return 합니다.
+
+### 소스코드
+
+```jsx
+class Solution {
+    public int solution(int a, int b, int c) {
+        int answer = 0;
+        if (a != b && b != c && c != a) {
+            answer = a + b + c;
+        } else if (a == b && b == c) {
+            answer = (a + b + c) * (a * a + b * b + c * c) * (a * a * a + b * b * b + c * c * c);
+        } else {
+            answer= (a + b + c) * (a * a + b * b + c * c);
+        }
+        return answer;
+    }
+}
+```
+
+## 원소들의 곱과 합
+
+### **문제 설명**
+
+정수가 담긴 리스트 `num_list`가 주어질 때, 모든 원소들의 곱이 모든 원소들의 합의 제곱보다 작으면 1을 크면 0을 return하도록 solution 함수를 완성해주세요.
+
+---
+
+### 제한사항
+
+- 2 ≤ `num_list`의 길이 ≤ 10
+- 1 ≤ `num_list`의 원소 ≤ 9
+
+---
+
+### 입출력 예
+
+| num_list | result |
+| --- | --- |
+| [3, 4, 5, 2, 1] | 1 |
+| [5, 7, 8, 3] | 0 |
+
+---
+
+### 입출력 예 설명
+
+입출력 예 #1
+
+- 모든 원소의 곱은 120, 합의 제곱은 225이므로 1을 return합니다.
+
+입출력 예 #2
+
+- 모든 원소의 곱은 840, 합의 제곱은 529이므로 0을 return합니다
+
+### 소스코드
+
+```jsx
+class Solution {
+    public int solution(int[] num_list) {
+        int sum = 0;
+        int mul = 1;
+        for(int i = 0; i < num_list.length; i++){
+            sum += num_list[i];
+            mul *= num_list[i];;
+        }
+        if (mul < sum * sum) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+```
+
+## 이어 붙인 수
+
+### **문제 설명**
+
+정수가 담긴 리스트 `num_list`가 주어집니다. `num_list`의 홀수만 순서대로 이어 붙인 수와 짝수만 순서대로 이어 붙인 수의 합을 return하도록 solution 함수를 완성해주세요.
+
+---
+
+### 제한사항
+
+- 2 ≤ `num_list`의 길이 ≤ 10
+- 1 ≤ `num_list`의 원소 ≤ 9
+- `num_list`에는 적어도 한 개씩의 짝수와 홀수가 있습니다.
+
+---
+
+### 입출력 예
+
+| num_list | result |
+| --- | --- |
+| [3, 4, 5, 2, 1] | 393 |
+| [5, 7, 8, 3] | 581 |
+
+---
+
+### 입출력 예 설명
+
+입출력 예 #1
+
+- 홀수만 이어 붙인 수는 351이고 짝수만 이어 붙인 수는 42입니다. 두 수의 합은 393입니다.
+
+입출력 예 #2
+
+- 홀수만 이어 붙인 수는 573이고 짝수만 이어 붙인 수는 8입니다. 두 수의 합은 581입니다.
+
+### 소스코드
+
+```jsx
+class Solution {
+    public int solution(int[] num_list) {
+        int answer = 0;
+        String odd = "";
+        String even = "";
+        
+        for (int i = 0; i < num_list.length; i++) {
+            if (num_list[i] % 2 == 0) {
+                // 짝수
+                even += String.valueOf(num_list[i]);
+            } else {
+                odd = String.valueOf(num_list[i]);
+            }
+        }
+        
+        answer = Integer.parseInt(even) + Integer.parseInt(odd);
+        return answer;
+    }
+}
+
+class Solution2 {
+    public int solution(int[] num_list) {
+        int answer = 0;
+        String odd = "";
+        String even = "";
+        
+        for (int i = 0; i < num_list.length; i++) {
+            if (num_list[i] % 2 == 0) {
+                // 짝수
+                even += String.valueOf(num_list[i]);
+            } else {
+                odd = String.valueOf(num_list[i]);
+            }
+        }
+        
+        answer = Integer.parseInt(even) + Integer.parseInt(odd);
+        return answer;
+    }
+}
+```
