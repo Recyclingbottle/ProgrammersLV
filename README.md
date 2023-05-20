@@ -880,3 +880,357 @@ class Solution {
     }
 }
 ```
+## 수 조작하기1
+
+### **문제 설명**
+
+정수 `n`과 문자열 `control`이 주어집니다. `control`은 "w", "a", "s", "d"의 4개의 문자로 이루어져 있으며, `control`의 앞에서부터 순서대로 문자에 따라 `n`의 값을 바꿉니다.
+
+- "w" : `n`이 1 커집니다.
+- "s" : `n`이 1 작아집니다.
+- "d" : `n`이 10 커집니다.
+- "a" : `n`이 10 작아집니다.
+
+위 규칙에 따라 `n`을 바꿨을 때 가장 마지막에 나오는 `n`의 값을 return 하는 solution 함수를 완성해 주세요.
+
+---
+
+### 제한사항
+
+- 100,000 ≤ `n` ≤ 100,000
+- 1 ≤ `control`의 길이 ≤ 100,000
+    - `control`은 알파벳 소문자 "w", "a", "s", "d"로 이루어진 문자열입니다.
+
+---
+
+### 입출력 예
+
+| n | control | result |
+| --- | --- | --- |
+| 0 | "wsdawsdassw" | -1 |
+
+---
+
+### 입출력 예 설명
+
+입출력 예 #1
+
+- 수 `n`은 `control`에 따라 다음과 같은 순서로 변하게 됩니다.
+- 0 → 1 → 0 → 10 → 0 → 1 → 0 → 10 → 0 → -1 → -2 → -1
+- 따라서 -1을 return 합니다.
+
+### 소스코드
+
+```jsx
+class Solution {
+    public int solution(int n, String control) {
+        int answer = 0;
+        for (int i = 0; i < control.length(); i++)
+        {
+            char c = control.charAt(i);
+            if (c == 'w') {
+                n += 1;
+            } else if (c == 's') {
+                n -= 1;
+            } else if (c == 'd') {
+                n += 10;
+            } else if (c == 'a') {
+                n -= 10;
+            }
+        }
+        return n;
+    }
+}
+```
+## 수 조작하기 2
+
+### **문제 설명**
+
+정수 배열 `numLog`가 주어집니다. 처음에 `numLog[0]`에서 부터 시작해 "w", "a", "s", "d"로 이루어진 문자열을 입력으로 받아 순서대로 다음과 같은 조작을 했다고 합시다.
+
+- "w" : 수에 1을 더한다.
+- "s" : 수에 1을 뺀다.
+- "d" : 수에 10을 더한다.
+- "a" : 수에 10을 뺀다.
+
+그리고 매번 조작을 할 때마다 결괏값을 기록한 정수 배열이 `numLog`입니다. 즉, `numLog[i]`는 `numLog[0]`로부터 총 `i`번의 조작을 가한 결과가 저장되어 있습니다.
+
+주어진 정수 배열 `numLog`에 대해 조작을 위해 입력받은 문자열을 return 하는 solution 함수를 완성해 주세요.
+
+---
+
+### 제한사항
+
+- 2 ≤ `log`의 길이 ≤ 100,000
+    - 100,000 ≤ `log[0]` ≤ 100,000
+    - 1 ≤ `i` ≤ `log`의 길이인 모든 `i`에 대해 `|log[i] - log[i - 1]|`의 값은 1 또는 10입니다.
+
+---
+
+### 입출력 예
+
+| log | result |
+| --- | --- |
+| [0, 1, 0, 10, 0, 1, 0, 10, 0, -1, -2, -1] | "wsdawsdassw" |
+
+---
+
+### 입출력 예 설명
+
+입출력 예 #1
+
+- result인 "wsdawsdassw"를 따라 `log[0]`에서부터 시작해 조작을 하면 `log`의 값과 순서대로 일치합니다. 따라서 "wsdawsdassw"를 return 합니다.
+
+---
+
+### Hint
+
+"수 조작하기 1" 문제의 `n`값이 `log[0]`에 해당하며, 이 문제에서 주어진 `log`에 따라 "수 조작하기 1" 문제의 `control`을 구하는 문제라고 이해할 수 있습니다.
+
+입출력 예 #1은 "수 조작하기 1" 문제의 입출력 예 #1과 같은 예시이므로 참고하시기 바랍니다
+
+### 소스코드
+
+```jsx
+class Solution {
+    public String solution(int[] numLog) {
+        String answer = "";
+        for(int i = 0 ; i < numLog.length - 1 ; i++){
+            int a = numLog[i];
+            int b = numLog[i+1];
+            if(b - a == 1)
+            {
+                answer += "w";
+            }
+            else if(b-a == -1){
+                answer += "s";
+            }
+            else if(b-a == 10){
+                answer += "d";
+            }
+            else if(b-a == -10){
+                answer += "a";
+            }
+        }
+        return answer;
+    }
+}
+```
+## 수 조작하기 2
+
+### **문제 설명**
+
+정수 배열 `numLog`가 주어집니다. 처음에 `numLog[0]`에서 부터 시작해 "w", "a", "s", "d"로 이루어진 문자열을 입력으로 받아 순서대로 다음과 같은 조작을 했다고 합시다.
+
+- "w" : 수에 1을 더한다.
+- "s" : 수에 1을 뺀다.
+- "d" : 수에 10을 더한다.
+- "a" : 수에 10을 뺀다.
+
+그리고 매번 조작을 할 때마다 결괏값을 기록한 정수 배열이 `numLog`입니다. 즉, `numLog[i]`는 `numLog[0]`로부터 총 `i`번의 조작을 가한 결과가 저장되어 있습니다.
+
+주어진 정수 배열 `numLog`에 대해 조작을 위해 입력받은 문자열을 return 하는 solution 함수를 완성해 주세요.
+
+---
+
+### 제한사항
+
+- 2 ≤ `log`의 길이 ≤ 100,000
+    - 100,000 ≤ `log[0]` ≤ 100,000
+    - 1 ≤ `i` ≤ `log`의 길이인 모든 `i`에 대해 `|log[i] - log[i - 1]|`의 값은 1 또는 10입니다.
+
+---
+
+### 입출력 예
+
+| log | result |
+| --- | --- |
+| [0, 1, 0, 10, 0, 1, 0, 10, 0, -1, -2, -1] | "wsdawsdassw" |
+
+---
+
+### 입출력 예 설명
+
+입출력 예 #1
+
+- result인 "wsdawsdassw"를 따라 `log[0]`에서부터 시작해 조작을 하면 `log`의 값과 순서대로 일치합니다. 따라서 "wsdawsdassw"를 return 합니다.
+
+---
+
+### Hint
+
+"수 조작하기 1" 문제의 `n`값이 `log[0]`에 해당하며, 이 문제에서 주어진 `log`에 따라 "수 조작하기 1" 문제의 `control`을 구하는 문제라고 이해할 수 있습니다.
+
+입출력 예 #1은 "수 조작하기 1" 문제의 입출력 예 #1과 같은 예시이므로 참고하시기 바랍니다
+
+### 소스코드
+
+```jsx
+class Solution {
+    public String solution(int[] numLog) {
+        String answer = "";
+        for(int i = 0 ; i < numLog.length - 1 ; i++){
+            int a = numLog[i];
+            int b = numLog[i+1];
+            if(b - a == 1)
+            {
+                answer += "w";
+            }
+            else if(b-a == -1){
+                answer += "s";
+            }
+            else if(b-a == 10){
+                answer += "d";
+            }
+            else if(b-a == -10){
+                answer += "a";
+            }
+        }
+        return answer;
+    }
+}
+```
+## 수열과 구간 쿼리 3
+
+### **문제 설명**
+
+정수 배열 `arr`와 2차원 정수 배열 `queries`이 주어집니다. `queries`의 원소는 각각 하나의 `query`를 나타내며, `[i, j]` 꼴입니다.
+
+각 `query`마다 순서대로 `arr[i]`의 값과 `arr[j]`의 값을 서로 바꿉니다.
+
+위 규칙에 따라 `queries`를 처리한 이후의 `arr`를 return 하는 solution 함수를 완성해 주세요.
+
+---
+
+### 제한사항
+
+- 1 ≤ `arr`의 길이 ≤ 1,000
+    - 0 ≤ `arr`의 원소 ≤ 1,000,000
+- 1 ≤ `queries`의 길이 ≤ 1,000
+    - 0 ≤ `i` < `j` < `arr`의 길이
+
+---
+
+### 입출력 예
+
+| arr | queries | result |
+| --- | --- | --- |
+| [0, 1, 2, 3, 4] | [[0, 3],[1, 2],[1, 4]] | [3, 4, 1, 0, 2] |
+
+---
+
+### 입출력 예 설명
+
+입출력 예 #1
+
+- 각 쿼리에 따라 `arr`가 다음과 같이 변합니다.
+
+arr
+
+---
+
+[0, 1, 2, 3, 4]
+
+---
+
+[3, 1, 2, 0, 4]
+
+---
+
+[3, 2, 1, 0, 4]
+
+---
+
+[3, 4, 1, 0, 2]
+
+---
+
+- 따라서 [3, 4, 1, 0, 2]를 return 합니다.
+
+### 소스코드
+
+```jsx
+class Solution {
+    public int[] solution(int[] arr, int[][] queries) {
+        for(int i = 0; i < queries.length ; i++){
+            int j = queries[i][0];
+            int k = queries[i][1];
+            int tmp = arr[j];
+            arr[j] = arr[k];
+            arr[k] = tmp;
+        }
+        return arr;
+    }
+}
+```
+## 수열과 구간 쿼리 2
+
+### **문제 설명**
+
+정수 배열 `arr`와 2차원 정수 배열 `queries`이 주어집니다. `queries`의 원소는 각각 하나의 `query`를 나타내며, `[s, e, k]` 꼴입니다.
+
+각 `query`마다 순서대로 `s` ≤ `i` ≤ `e`인 모든 `i`에 대해 `k`보다 크면서 가장 작은 `arr[i]`를 찾습니다.
+
+각 쿼리의 순서에 맞게 답을 저장한 배열을 반환하는 solution 함수를 완성해 주세요.
+
+단, 특정 쿼리의 답이 존재하지 않으면 -1을 저장합니다.
+
+---
+
+### 제한사항
+
+- 1 ≤ `arr`의 길이 ≤ 1,000
+    - 0 ≤ `arr`의 원소 ≤ 1,000,000
+- 1 ≤ `queries`의 길이 ≤ 1,000
+    - 0 ≤ `s` ≤ `e` < `arr`의 길이
+    - 0 ≤ `k` ≤ 1,000,000
+
+---
+
+### 입출력 예
+
+| arr | queries | result |
+| --- | --- | --- |
+| [0, 1, 2, 4, 3] | [[0, 4, 2],[0, 3, 2],[0, 2, 2]] | [3, 4, -1] |
+
+---
+
+### 입출력 예 설명
+
+입출력 예 #1
+
+- 첫 번째 쿼리의 범위에는 0, 1, 2, 4, 3이 있으며 이 중 2보다 크면서 가장 작은 값은 3입니다.
+- 두 번째 쿼리의 범위에는 0, 1, 2, 4가 있으며 이 중 2보다 크면서 가장 작은 값은 4입니다.
+- 세 번째 쿼리의 범위에는 0, 1, 2가 있으며 여기에는 2보다 큰 값이 없습니다.
+- 따라서 [3, 4, -1]을 return 합니다.
+
+### 소스코드
+
+```jsx
+class Solution {
+    public int[] solution(int[] arr, int[][] queries) {
+        int[] answer = new int[queries.length];
+
+        for (int i = 0; i < queries.length; i++) {
+            int start = queries[i][0];
+            int end = queries[i][1];
+            int k = queries[i][2];
+            int min = Integer.MAX_VALUE;
+
+            for (int j = start; j <= end; j++) {
+                if (arr[j] > k && arr[j] < min) {
+                    min = arr[j];
+                }
+            }
+
+            if (min == Integer.MAX_VALUE) {
+                answer[i] = -1;
+            } else {
+                answer[i] = min;
+            }
+        }
+
+        return answer;
+    }
+}
+```
